@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"><title>Casino Royal V15</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="pantalla-inicio" class="pantalla activa">
+    <div class="panel-glass">
+        <h1 class="logo">⚜️ CASINO ROYAL</h1>
+        <input type="text" id="input-nick" placeholder="Nombre">
+        <button class="btn-gold" onclick="App.crearSala()">CREAR SALA</button>
+        <div class="join-row"><input type="text" id="codigo-input" placeholder="CÓDIGO"><button onclick="App.unirse()">OK</button></div>
+        <button class="btn-dark" onclick="App.irSol()">SOLITARIO</button>
+    </div>
+</div>
+
+<div id="pantalla-espera" class="pantalla">
+    <div class="lobby-layout">
+        <div class="lobby-info">
+            <h2 onclick="UI.copiar()">SALA: <span id="display-codigo" style="color:#d4af37; cursor:pointer;">---</span> 📋</h2>
+            <div id="host-controls" class="hidden">
+                <select id="dealer-mode-select" onchange="App.cambiarConfig()"><option value="IA">Dealer: IA</option><option value="PLAYER">Dealer: Jugador</option><option value="ROTATIVE">Dealer: Rotativo</option></select>
+                <select id="player-dealer-select" class="hidden" onchange="App.cambiarConfig()"></select>
+                <button class="btn-gold" onclick="App.iniciar()">INICIAR</button>
+            </div>
+            <div class="player-list"><h3>Jugadores (<span id="count">0</span>) <button onclick="App.addBot()" class="btn-bot">+🤖</button></h3><div id="lista-jugadores"></div></div>
+            <button class="btn-dark" onclick="App.salir()">SALIR</button>
+        </div>
+        <div class="lobby-chat"><div id="chat-msgs" class="chat-msgs"></div><div class="chat-input"><input id="chat-text"><button onclick="Chat.enviar('chat-text')">➤</button></div></div>
+    </div>
+</div>
+
+<div id="pantalla-juego" class="pantalla">
+    <div id="tablero" class="tablero"></div>
+    <button class="btn-chat-toggle" onclick="UI.toggleChat()">💬</button>
+    <div id="chat-flotante" class="chat-flotante hidden">
+        <div id="chat-msgs-game" class="chat-msgs"></div>
+        <div class="chat-input"><input id="chat-text-game"><button onclick="Chat.enviar('chat-text-game')">➤</button></div>
+    </div>
+    <div id="game-controls" class="game-controls hidden"></div>
+    <button class="btn-exit-game" onclick="App.salir()">⚙️</button>
+</div>
+
+<div id="pantalla-solitario" class="pantalla">
+    <button class="float-btn-sol" onclick="App.salir()">🏠</button>
+    <div id="tablero-solitario" class="tablero-sol"></div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="utils.js"></script><script src="chat.js"></script><script src="klondike.js"></script><script src="blackjack.js"></script><script src="client.js"></script>
+</body>
+</html>

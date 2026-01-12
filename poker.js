@@ -1,0 +1,1 @@
+const Poker = { render: () => Utils.limpiar('tablero').innerHTML='<h2 style="margin-top:100px;text-align:center">POKER PRÓXIMAMENTE</h2>' };
